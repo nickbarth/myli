@@ -16,7 +16,7 @@ func NewConnection() Connection {
 	uri := os.Getenv("MYSQL_URI")
 
 	if uri == "" {
-		log.Fatal("MySQL enviroment url required.\neg `MYSQL_URI='root:password@tcp(localhost:3306)/'`")
+		log.Fatal("MySQL enviroment url required.\neg `MYSQL_URI='root:password@tcp(127.0.0.1:3306)/'`")
 	}
 
 	db, err := sql.Open("mysql", uri)

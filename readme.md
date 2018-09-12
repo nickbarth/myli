@@ -1,6 +1,6 @@
 # myli
 
-myli is a cli mysql admin utility tool for managing users and databases.
+myli is a cli mysql admin utility tool for managing databases.
 
 ### Usage
 
@@ -18,6 +18,7 @@ VERSION:
 COMMANDS:
      user     ls, add, rm
      db       ls, add, rm
+     table    ls, rm
      help, h  Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:

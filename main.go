@@ -20,8 +20,7 @@ func main() {
 
 	app.Commands = []cli.Command{
 		{
-			Name: "user",
-			// Aliases: []string{"users", "u"},
+			Name:  "user",
 			Usage: "ls, add, rm",
 			Subcommands: []cli.Command{
 				{
@@ -82,8 +81,7 @@ func main() {
 			},
 		},
 		{
-			Name: "db",
-			// Aliases: []string{"dbs", "d"},
+			Name:  "db",
 			Usage: "ls, add, rm",
 			Subcommands: []cli.Command{
 				{
@@ -130,6 +128,47 @@ func main() {
 						db.Drop(database)
 
 						fmt.Printf("database `%s` removed.\n", database)
+						return nil
+					},
+				},
+			},
+		},
+		{
+			Name:  "table",
+			Usage: "ls, rm",
+			Subcommands: []cli.Command{
+				{
+					Name:  "ls",
+					Usage: "[database] -- list all tables",
+					Action: func(c *cli.Context) error {
+						database := c.Args().Get(0)
+
+						if database == "" {
+							log.Fatal("myli: args required\nusage: myli table ls [database]")
+						}
+
+						conn := NewConnection()
+						db := Table{conn: conn}
+						db.List(database)
+						return nil
+					},
+				},
+				{
+					Name:  "rm",
+					Usage: "[database] [table] -- remove a table",
+					Action: func(c *cli.Context) error {
+						database := c.Args().Get(0)
+						table := c.Args().Get(1)
+
+						if database == "" || table == "" {
+							log.Fatal("myli: args required\nusage: myli table rm [database] [table]")
+						}
+
+						conn := NewConnection()
+						db := Table{conn: conn}
+						db.Drop(database, table)
+
+						fmt.Printf("table `%s` removed.\n", table)
 						return nil
 					},
 				},
