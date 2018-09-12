@@ -1,6 +1,6 @@
 # myli
 
-myli is a cli mysql admin utility tool for managing databases.
+myli is a tool for managing mysql databases.
 
 ### Usage
 
